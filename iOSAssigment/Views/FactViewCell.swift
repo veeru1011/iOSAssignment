@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FactViewCell: UITableViewCell {
     
@@ -14,7 +15,7 @@ class FactViewCell: UITableViewCell {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
-        img.layer.cornerRadius = 2
+        img.layer.cornerRadius = 1
         img.clipsToBounds = true // this will make sure its children do not go out of the boundary
         return img
     }()
@@ -49,7 +50,7 @@ class FactViewCell: UITableViewCell {
                 }
                 
                 if let imageUrl = factItem.imageUrl {
-                    self.displayImageView.setImageFromServerURL(urlString: imageUrl)
+                    self.displayImageView.sd_setImage(with: URL(string: imageUrl) , completed: nil)
                 }
             }
         }
@@ -72,7 +73,7 @@ class FactViewCell: UITableViewCell {
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
         
-        displayImageView.centerYAnchor.constraint(equalTo:marginGuide.centerYAnchor).isActive = true
+    displayImageView.centerYAnchor.constraint(equalTo:marginGuide.centerYAnchor).isActive = true
         displayImageView.leadingAnchor.constraint(equalTo:marginGuide.leadingAnchor, constant:5).isActive = true
         displayImageView.widthAnchor.constraint(equalToConstant:70).isActive = true
         displayImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
@@ -93,19 +94,3 @@ class FactViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-extension UIImageView {
-    public func setImageFromServerURL(urlString: String) {
-        
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            
-            if error != nil {
-                return
-            }
-            DispatchQueue.main.async(execute: { () -> Void in
-                let image = UIImage(data: data!)
-                self.image = image
-            })
-            
-        }).resume()
-    }}

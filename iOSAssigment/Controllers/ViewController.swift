@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import ANLoader
 
 class ViewController: UIViewController {
     
     
-    var factlist: FactList?
+    var factList: FactList?
     var facts: [Fact]?
     let tableView = UITableView(frame:.zero, style: .grouped)
     
@@ -38,8 +39,7 @@ class ViewController: UIViewController {
         setUpNavigation()
         setUpTableView()
         view.addSubview(activityIndicator)
-        activityIndicator.center = view.center
-        activityIndicator.startAnimating()
+        ANLoader.showLoading("Loading", disableUI: true)
         fetchData()
         
     }
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // MARK: - SetUp UI
+    // MARK: - UI Helper
     func setUpTableView() {
         view.addSubview(tableView)
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.01))
@@ -95,13 +95,17 @@ class ViewController: UIViewController {
             switch success {
             case true :
                 if let list = factlist {
-                    self.factlist = list
+                    self.factList = list
                     if let facts = list.facts?.filter({ !($0.title == nil && $0.descriptions == nil && $0.imageUrl == nil) }) {
                         self.facts = facts
                     }
+                    //Hide ANLoader after 100 milisecound
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        ANLoader.hide()
+                    }
+                    
                     DispatchQueue.main.async {
-                        self.navigationItem.title = self.factlist?.title
-                        self.activityIndicator.stopAnimating()
+                        self.navigationItem.title = self.factList?.title
                         self.tableView.reloadData()
                         if self.refreshControl.isRefreshing {
                             self.refreshControl.endRefreshing()

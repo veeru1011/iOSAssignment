@@ -14,9 +14,13 @@
 		B96A39AC20EE2FC700D89B5F /* FactViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A39AB20EE2FC700D89B5F /* FactViewCell.swift */; };
 		B96A39AE20EE301400D89B5F /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A39AD20EE301400D89B5F /* Fact.swift */; };
 		BCEEFDA420EE7338002810B8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEEFDA320EE7338002810B8 /* APIManager.swift */; };
+		EC3D5F80DFF24B48D63F9FC7 /* Pods_iOSAssigment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613303F1646CDCBCAEDCB5C7 /* Pods_iOSAssigment.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		193323B86FE2D7629ABD7F0E /* Pods-iOSAssigment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAssigment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment.debug.xcconfig"; sourceTree = "<group>"; };
+		455522DF0A33A44B9842E046 /* Pods-iOSAssigment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAssigment.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment.release.xcconfig"; sourceTree = "<group>"; };
+		613303F1646CDCBCAEDCB5C7 /* Pods_iOSAssigment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSAssigment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B96A398E20EE2E0E00D89B5F /* iOSAssigment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAssigment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B96A399120EE2E0E00D89B5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B96A399320EE2E0E00D89B5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC3D5F80DFF24B48D63F9FC7 /* Pods_iOSAssigment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D1659D5822189B619500E43 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				193323B86FE2D7629ABD7F0E /* Pods-iOSAssigment.debug.xcconfig */,
+				455522DF0A33A44B9842E046 /* Pods-iOSAssigment.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AB05E5C26373EBDF11930FC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				613303F1646CDCBCAEDCB5C7 /* Pods_iOSAssigment.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B96A398520EE2E0E00D89B5F = {
 			isa = PBXGroup;
 			children = (
 				B96A399020EE2E0E00D89B5F /* iOSAssigment */,
 				B96A398F20EE2E0E00D89B5F /* Products */,
+				1D1659D5822189B619500E43 /* Pods */,
+				AB05E5C26373EBDF11930FC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B96A39A020EE2E1900D89B5F /* Build configuration list for PBXNativeTarget "iOSAssigment" */;
 			buildPhases = (
+				986CA690B70D6AD742AC8A3F /* [CP] Check Pods Manifest.lock */,
 				B96A398A20EE2E0E00D89B5F /* Sources */,
 				B96A398B20EE2E0E00D89B5F /* Frameworks */,
 				B96A398C20EE2E0E00D89B5F /* Resources */,
+				6C539F2673F7288AB3E68F9D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +201,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C539F2673F7288AB3E68F9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ANLoader/ANLoader.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ANLoader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		986CA690B70D6AD742AC8A3F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSAssigment-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B96A398A20EE2E0E00D89B5F /* Sources */ = {
@@ -318,6 +385,7 @@
 		};
 		B96A39A120EE2E1900D89B5F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 193323B86FE2D7629ABD7F0E /* Pods-iOSAssigment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -336,6 +404,7 @@
 		};
 		B96A39A220EE2E1900D89B5F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 455522DF0A33A44B9842E046 /* Pods-iOSAssigment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

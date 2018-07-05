@@ -1,0 +1,6 @@
+framework module Pods_iOSAssigment {
+  umbrella header "Pods-iOSAssigment-umbrella.h"
+
+  export *
+  module * { export * }
+}
