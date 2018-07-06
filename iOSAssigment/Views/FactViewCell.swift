@@ -38,9 +38,8 @@ class FactViewCell: UITableViewCell {
     
     var fact: Fact? {
         didSet {
-            self.displayImageView.image = nil
-            self.titleLabel.text  = ""
-            self.descriptionLabel.text  = ""
+            self.titleLabel.text  = " "
+            self.descriptionLabel.text  = " "
             self.displayImageView.image = nil
             guard let factItem = fact else { return }
             if let title = factItem.title {
@@ -50,7 +49,7 @@ class FactViewCell: UITableViewCell {
                 }
                 
                 if let imageUrl = factItem.imageUrl {
-                    self.displayImageView.sd_setImage(with: URL(string: imageUrl) , completed: nil)
+                    self.displayImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "placeholder"))
                 }
             }
         }
@@ -73,13 +72,13 @@ class FactViewCell: UITableViewCell {
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
         
-    displayImageView.centerYAnchor.constraint(equalTo:marginGuide.centerYAnchor).isActive = true
+        displayImageView.topAnchor.constraint(equalTo:marginGuide.topAnchor).isActive = true
         displayImageView.leadingAnchor.constraint(equalTo:marginGuide.leadingAnchor, constant:5).isActive = true
         displayImageView.widthAnchor.constraint(equalToConstant:70).isActive = true
         displayImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
         
-        
         titleLabel.topAnchor.constraint(equalTo:marginGuide.topAnchor,constant:10).isActive = true
+        titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo:self.displayImageView.trailingAnchor, constant:10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor).isActive = true
         
@@ -87,7 +86,6 @@ class FactViewCell: UITableViewCell {
         descriptionLabel.leadingAnchor.constraint(equalTo:self.displayImageView.trailingAnchor, constant:10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo:marginGuide.trailingAnchor).isActive = true
         descriptionLabel.bottomAnchor.constraint(equalTo:marginGuide.bottomAnchor).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

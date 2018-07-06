@@ -132,7 +132,7 @@ class ViewController: UIViewController {
     // MARK: - AlertMessage UI
     
     func showAlert(_ message: String, title: String = "Alert") {
-        
+        ANLoader.hide()
         let alertController = UIAlertController(title: title, message:
             message, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
