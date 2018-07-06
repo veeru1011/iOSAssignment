@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct APIURL
-{
+struct APIURL {
     static let baseURL = URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
 }
 
@@ -34,6 +33,7 @@ class APIManager: NSObject {
         return sharedInstance
     }
     
+     // Fetching data from server
     func getFactList(completionHandler:@escaping(Bool,FactList?,String)->Void) -> Void  {
         
         let request = URLRequest(url: self.baseURL)
@@ -57,6 +57,5 @@ class APIManager: NSObject {
             }
         })
         task.resume()
-        
     }
 }
