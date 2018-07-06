@@ -14,9 +14,20 @@
 		B96A39AC20EE2FC700D89B5F /* FactViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A39AB20EE2FC700D89B5F /* FactViewCell.swift */; };
 		B96A39AE20EE301400D89B5F /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A39AD20EE301400D89B5F /* Fact.swift */; };
 		BC860F7E20EF0FBA0068CF65 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC860F7D20EF0FBA0068CF65 /* NetworkManager.swift */; };
+		BC860F8620EF16A90068CF65 /* iOSAssigmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC860F8520EF16A90068CF65 /* iOSAssigmentTests.swift */; };
 		BCEEFDA420EE7338002810B8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEEFDA320EE7338002810B8 /* APIManager.swift */; };
 		EC3D5F80DFF24B48D63F9FC7 /* Pods_iOSAssigment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613303F1646CDCBCAEDCB5C7 /* Pods_iOSAssigment.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC860F8820EF16A90068CF65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B96A398620EE2E0E00D89B5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B96A398D20EE2E0E00D89B5F;
+			remoteInfo = iOSAssigment;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		193323B86FE2D7629ABD7F0E /* Pods-iOSAssigment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAssigment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment.debug.xcconfig"; sourceTree = "<group>"; };
@@ -31,6 +42,9 @@
 		B96A39AB20EE2FC700D89B5F /* FactViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactViewCell.swift; sourceTree = "<group>"; };
 		B96A39AD20EE301400D89B5F /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		BC860F7D20EF0FBA0068CF65 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BC860F8320EF16A90068CF65 /* iOSAssigmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSAssigmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC860F8520EF16A90068CF65 /* iOSAssigmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSAssigmentTests.swift; sourceTree = "<group>"; };
+		BC860F8720EF16A90068CF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCEEFDA320EE7338002810B8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,6 +54,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC3D5F80DFF24B48D63F9FC7 /* Pods_iOSAssigment.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC860F8020EF16A90068CF65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +90,7 @@
 				B96A399020EE2E0E00D89B5F /* iOSAssigment */,
 				B96A398F20EE2E0E00D89B5F /* Products */,
 				1D1659D5822189B619500E43 /* Pods */,
+				BC860F8420EF16A90068CF65 /* iOSAssigmentTests */,
 				AB05E5C26373EBDF11930FC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				B96A398E20EE2E0E00D89B5F /* iOSAssigment.app */,
+				BC860F8320EF16A90068CF65 /* iOSAssigmentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +151,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		BC860F8420EF16A90068CF65 /* iOSAssigmentTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC860F8520EF16A90068CF65 /* iOSAssigmentTests.swift */,
+				BC860F8720EF16A90068CF65 /* Info.plist */,
+			);
+			path = iOSAssigmentTests;
+			sourceTree = "<group>";
+		};
 		BCEEFDA220EE7322002810B8 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,19 +191,42 @@
 			productReference = B96A398E20EE2E0E00D89B5F /* iOSAssigment.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BC860F8220EF16A90068CF65 /* iOSAssigmentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC860F8C20EF16A90068CF65 /* Build configuration list for PBXNativeTarget "iOSAssigmentTests" */;
+			buildPhases = (
+				BC860F7F20EF16A90068CF65 /* Sources */,
+				BC860F8020EF16A90068CF65 /* Frameworks */,
+				BC860F8120EF16A90068CF65 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC860F8920EF16A90068CF65 /* PBXTargetDependency */,
+			);
+			name = iOSAssigmentTests;
+			productName = iOSAssigmentTests;
+			productReference = BC860F8320EF16A90068CF65 /* iOSAssigmentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B96A398620EE2E0E00D89B5F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = VBT;
 				TargetAttributes = {
 					B96A398D20EE2E0E00D89B5F = {
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
+					};
+					BC860F8220EF16A90068CF65 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B96A398D20EE2E0E00D89B5F;
 					};
 				};
 			};
@@ -189,6 +244,7 @@
 			projectRoot = "";
 			targets = (
 				B96A398D20EE2E0E00D89B5F /* iOSAssigment */,
+				BC860F8220EF16A90068CF65 /* iOSAssigmentTests */,
 			);
 		};
 /* End PBXProject section */
@@ -200,6 +256,13 @@
 			files = (
 				B96A399C20EE2E1900D89B5F /* LaunchScreen.storyboard in Resources */,
 				B96A399920EE2E1900D89B5F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC860F8120EF16A90068CF65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +325,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BC860F7F20EF16A90068CF65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC860F8620EF16A90068CF65 /* iOSAssigmentTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC860F8920EF16A90068CF65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B96A398D20EE2E0E00D89B5F /* iOSAssigment */;
+			targetProxy = BC860F8820EF16A90068CF65 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B96A399A20EE2E1900D89B5F /* LaunchScreen.storyboard */ = {
@@ -427,6 +506,38 @@
 			};
 			name = Release;
 		};
+		BC860F8A20EF16A90068CF65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSAssigmentTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vbt.iOSAssigmentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSAssigment.app/iOSAssigment";
+			};
+			name = Debug;
+		};
+		BC860F8B20EF16A90068CF65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSAssigmentTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vbt.iOSAssigmentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSAssigment.app/iOSAssigment";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -444,6 +555,15 @@
 			buildConfigurations = (
 				B96A39A120EE2E1900D89B5F /* Debug */,
 				B96A39A220EE2E1900D89B5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC860F8C20EF16A90068CF65 /* Build configuration list for PBXNativeTarget "iOSAssigmentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC860F8A20EF16A90068CF65 /* Debug */,
+				BC860F8B20EF16A90068CF65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
