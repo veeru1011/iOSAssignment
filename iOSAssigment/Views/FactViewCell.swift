@@ -16,9 +16,10 @@ class FactViewCell: UITableViewCell {
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         img.layer.cornerRadius = 1
-        img.clipsToBounds = true // this will make sure its children do not go out of the boundary
+        img.clipsToBounds = true
         return img
     }()
+    
     let titleLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -27,6 +28,7 @@ class FactViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     let descriptionLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
@@ -54,6 +56,7 @@ class FactViewCell: UITableViewCell {
             }
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -61,8 +64,6 @@ class FactViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -77,15 +78,16 @@ class FactViewCell: UITableViewCell {
         displayImageView.widthAnchor.constraint(equalToConstant:70).isActive = true
         displayImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo:marginGuide.topAnchor,constant:10).isActive = true
-        titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
+        titleLabel.topAnchor.constraint(equalTo:marginGuide.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo:self.displayImageView.trailingAnchor, constant:10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor).isActive = true
         
         descriptionLabel.topAnchor.constraint(equalTo:self.titleLabel.bottomAnchor,constant:5).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo:self.displayImageView.trailingAnchor, constant:10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo:marginGuide.trailingAnchor).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo:marginGuide.bottomAnchor).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo:marginGuide.bottomAnchor,constant: -20).isActive = true
+        
+
     }
     
     required init?(coder aDecoder: NSCoder) {

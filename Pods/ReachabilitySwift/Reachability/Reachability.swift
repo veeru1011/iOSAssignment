@@ -133,7 +133,7 @@ public class Reachability {
     fileprivate var previousFlags: SCNetworkReachabilityFlags?
     
     fileprivate var isRunningOnDevice: Bool = {
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #if targetEnvironment(simulator)
             return false
         #else
             return true
@@ -143,7 +143,7 @@ public class Reachability {
     fileprivate var notifierRunning = false
     fileprivate let reachabilityRef: SCNetworkReachability
     
-    fileprivate let reachabilitySerialQueue = DispatchQueue(label: "uk.co.ashleymills.reachability")
+    fileprivate let reachabilitySerialQueue = DispatchQueue(label: "in.co.vbt.reachability")
     
     required public init(reachabilityRef: SCNetworkReachability) {
         allowsCellularConnection = true

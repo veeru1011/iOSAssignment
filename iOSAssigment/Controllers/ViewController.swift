@@ -39,16 +39,12 @@ class ViewController: UIViewController {
         setUpTableView()
         view.addSubview(activityIndicator)
         fetchData()
-        
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+
     // MARK: - UI Helper
     func setUpTableView() {
         view.addSubview(tableView)
+        tableView.accessibilityIdentifier = "factTableView"
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.01))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
@@ -91,7 +87,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Fetch Data from server
-    
     func fetchData(){
         
         NetworkManager.isUnreachable { _ in
@@ -100,7 +95,6 @@ class ViewController: UIViewController {
         NetworkManager.isReachable { _ in
             
             ANLoader.showLoading("Loading", disableUI: true)
-            
             APIManager.shared().getFactList { (success, factlist, errorMessage) in
                 
                 switch success {
@@ -129,25 +123,21 @@ class ViewController: UIViewController {
             }
         }
     }
-    // MARK: - AlertMessage UI
     
+    // MARK: - AlertMessage UI
     func showAlert(_ message: String, title: String = "Alert") {
         ANLoader.hide()
         let alertController = UIAlertController(title: title, message:
             message, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-        
         self.present(alertController, animated: true, completion: nil)
-        
     }
 }
 
 // MARK: - UITableViewDataSource
-
 extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if let facts = facts {
             return facts.count
         }
@@ -156,11 +146,9 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FactViewCell
-        
         if let facts = facts {
             cell.fact =  facts[indexPath.row]
         }
-        
         return cell
     }
     
