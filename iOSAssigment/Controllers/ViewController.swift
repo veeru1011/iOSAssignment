@@ -15,14 +15,6 @@ class ViewController: UIViewController {
     var facts: [Fact]?
     let tableView = UITableView(frame:.zero, style: .grouped)
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
-        indicator.color = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        indicator.hidesWhenStopped = true
-        return indicator
-        
-    }()
-    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -37,7 +29,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigation()
         setUpTableView()
-        view.addSubview(activityIndicator)
         fetchData()
     }
 
