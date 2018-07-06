@@ -1,22 +1,26 @@
 PODS:
   - ANLoader (1.1.1)
+  - ReachabilitySwift (4.1.0)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
 
 DEPENDENCIES:
   - ANLoader
+  - ReachabilitySwift
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ANLoader
+    - ReachabilitySwift
     - SDWebImage
 
 SPEC CHECKSUMS:
   ANLoader: 46bad48a249902b50a04e510a204f0a3d36a981d
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
 
-PODFILE CHECKSUM: 87a7733eb986544b3de2614debd2c6af06eb9c21
+PODFILE CHECKSUM: 8f96be33c302b77230e04582428a645017cfd639
 
 COCOAPODS: 1.5.3

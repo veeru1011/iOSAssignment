@@ -8,5 +8,6 @@ target 'iOSAssigment' do
   # Pods for iOSAssigment
   pod 'SDWebImage'
   pod 'ANLoader'
+  pod 'ReachabilitySwift'
 
 end

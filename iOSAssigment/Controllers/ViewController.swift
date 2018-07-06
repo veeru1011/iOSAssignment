@@ -11,7 +11,6 @@ import ANLoader
 
 class ViewController: UIViewController {
     
-    
     var factList: FactList?
     var facts: [Fact]?
     let tableView = UITableView(frame:.zero, style: .grouped)
@@ -39,7 +38,6 @@ class ViewController: UIViewController {
         setUpNavigation()
         setUpTableView()
         view.addSubview(activityIndicator)
-        ANLoader.showLoading("Loading", disableUI: true)
         fetchData()
         
     }
@@ -47,6 +45,7 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     // MARK: - UI Helper
     func setUpTableView() {
         view.addSubview(tableView)
@@ -81,6 +80,10 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
+        }
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -91,31 +94,51 @@ class ViewController: UIViewController {
     
     func fetchData(){
         
-        APIManager.shared().getFactList { (success, factlist, errorMessage) in
-            switch success {
-            case true :
-                if let list = factlist {
-                    self.factList = list
-                    if let facts = list.facts?.filter({ !($0.title == nil && $0.descriptions == nil && $0.imageUrl == nil) }) {
-                        self.facts = facts
-                    }
-                    //Hide ANLoader after 100 milisecound
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        ANLoader.hide()
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.navigationItem.title = self.factList?.title
-                        self.tableView.reloadData()
-                        if self.refreshControl.isRefreshing {
-                            self.refreshControl.endRefreshing()
+        NetworkManager.isUnreachable { _ in
+            self.showAlert("No Internet Connection")
+        }
+        NetworkManager.isReachable { _ in
+            
+            ANLoader.showLoading("Loading", disableUI: true)
+            
+            APIManager.shared().getFactList { (success, factlist, errorMessage) in
+                
+                switch success {
+                case true :
+                    if let list = factlist {
+                        self.factList = list
+                        if let facts = list.facts?.filter({ !($0.title == nil && $0.descriptions == nil && $0.imageUrl == nil) }) {
+                            self.facts = facts
+                        }
+                        //Hide ANLoader after 100 milisecound
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            ANLoader.hide()
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.navigationItem.title = self.factList?.title
+                            self.tableView.reloadData()
+                            if self.refreshControl.isRefreshing {
+                                self.refreshControl.endRefreshing()
+                            }
                         }
                     }
+                case false:
+                    self.showAlert(errorMessage)
                 }
-            case false:
-                print(errorMessage)
             }
         }
+    }
+    // MARK: - AlertMessage UI
+    
+    func showAlert(_ message: String, title: String = "Alert") {
+        
+        let alertController = UIAlertController(title: title, message:
+            message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
 }
 
