@@ -9,7 +9,7 @@
 import Foundation
 
 struct APIURL {
-    static let baseURL = URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
+    static let baseURL = URL(string: ApiBaseUrl)
 }
 
 class APIManager: NSObject {
@@ -44,7 +44,7 @@ class APIManager: NSObject {
                 let responseStrInISOLatin = String(data: data, encoding:.isoLatin1)
                 // converting the data in isoLatin1 encoding string becouse data is not in utf8 format
                 guard let dataInUTF8Format = responseStrInISOLatin?.data(using: .utf8) else {
-                    print("could not convert data to UTF-8 format")
+                    print(UTF8ErrorMessage)
                     return
                 }
                 let decoder = JSONDecoder()
@@ -52,7 +52,7 @@ class APIManager: NSObject {
                 completionHandler(true,factlist,"")
                 
             } catch let err {
-                print("Err", err)
+                print(err)
                 completionHandler(false,nil,err.localizedDescription)
             }
         })

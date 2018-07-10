@@ -11,8 +11,13 @@ import ANLoader
 
 class ViewController: UIViewController {
     
-    var factList: FactList?
-    var facts: [Fact]?
+    //Apimanger for initilising viewModel
+    lazy var apiManger =  {
+        return APIManager.shared()
+    }
+    //ViewModel
+    var factListViewModel: FactListViewModel!
+    //Initilize table view
     let tableView = UITableView(frame:.zero, style: .grouped)
     
     lazy var refreshControl: UIRefreshControl = {
@@ -27,15 +32,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //initilise FactListViewModel with APIManger
+        
+        factListViewModel = FactListViewModel(apiMgr: apiManger())
+        
+        //Set Up Navigation bar
         setUpNavigation()
+        
+        //Set tableview object for displaying data
         setUpTableView()
+        
+        
+        ANLoader.showLoading(Loading, disableUI: true)
+        
+        // viewModel fetch data
         fetchData()
     }
 
     // MARK: - UI Helper
     func setUpTableView() {
         view.addSubview(tableView)
-        tableView.accessibilityIdentifier = "factTableView"
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.01))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
@@ -59,9 +76,10 @@ class ViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.addSubview(self.refreshControl)
-        tableView.register(FactViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FactViewCell.self, forCellReuseIdentifier: CellIdentifier)
     }
     
+    //  NavigationBar setup method
     func setUpNavigation() {
         navigationItem.title = ""
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
@@ -73,54 +91,42 @@ class ViewController: UIViewController {
         }
     }
     
+    //  Handle Pull to refresh method
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         fetchData()
     }
     
     // MARK: - Fetch Data from server
-    func fetchData(){
+    func fetchData() {
         
-        NetworkManager.isUnreachable { _ in
-            self.showAlert("No Internet Connection")
-        }
-        NetworkManager.isReachable { _ in
+        factListViewModel.getFactList {
             
-            ANLoader.showLoading("Loading", disableUI: true)
-            APIManager.shared().getFactList { (success, factlist, errorMessage) in
-                
-                switch success {
-                case true :
-                    if let list = factlist {
-                        self.factList = list
-                        if let facts = list.facts?.filter({ !($0.title == nil && $0.descriptions == nil && $0.imageUrl == nil) }) {
-                            self.facts = facts
-                        }
-                        //Hide ANLoader after 100 milisecound
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            ANLoader.hide()
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.navigationItem.title = self.factList?.title
-                            self.tableView.reloadData()
-                            if self.refreshControl.isRefreshing {
-                                self.refreshControl.endRefreshing()
-                            }
-                        }
+            //Hide ANLoader after 100 milisecound
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                ANLoader.hide()
+            }
+            
+            if let errorMessage = self.factListViewModel.getErrorMessage() {
+                self.showAlert(errorMessage)
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.navigationItem.title = self.factListViewModel.navigationTitle()
+                    self.tableView.reloadData()
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
                     }
-                case false:
-                    self.showAlert(errorMessage)
                 }
             }
         }
     }
     
     // MARK: - AlertMessage UI
-    func showAlert(_ message: String, title: String = "Alert") {
+    func showAlert(_ message: String, title: String = AlertTitle) {
         ANLoader.hide()
         let alertController = UIAlertController(title: title, message:
             message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        alertController.addAction(UIAlertAction(title: DismissButtonTitle, style: UIAlertActionStyle.default,handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 }
@@ -129,17 +135,14 @@ class ViewController: UIViewController {
 extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let facts = facts {
-            return facts.count
-        }
-        return 0
+        return self.factListViewModel.numberOfFactsToDisplay()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FactViewCell
-        if let facts = facts {
-            cell.fact =  facts[indexPath.row]
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath) as! FactViewCell
+       
+        cell.fact =  self.factListViewModel.factAtIndex(index: indexPath.row)
+        
         return cell
     }
     

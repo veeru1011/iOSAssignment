@@ -12,8 +12,9 @@ struct FactList : Codable {
     let title: String?
     let facts: [Fact]?
     
+    //Fact list coding keys
     enum CodingKeys: String, CodingKey {
-        case title = "title"
+        case title = "title" //Raw value for enum case must be a literal
         case facts = "rows"
     }
 }
@@ -22,8 +23,9 @@ struct Fact : Codable {
     let descriptions: String?
     let imageUrl: String?
     
+    // Coding Keys for Facts
     enum CodingKeys: String, CodingKey {
-        case title = "title"
+        case title = "title" // Raw value for enum case must be a literal
         case descriptions = "description"
         case imageUrl = "imageHref"
     }

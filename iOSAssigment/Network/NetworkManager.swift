@@ -35,7 +35,7 @@ class NetworkManager: NSObject {
             // Start the network status notifier
             try reachability.startNotifier()
         } catch {
-            print("Unable to start notifier")
+            print(StartNotifierErrorMessage)
         }
     }
     
@@ -48,7 +48,7 @@ class NetworkManager: NSObject {
             // Stop the network status notifier
             try (NetworkManager.sharedInstance.reachability).startNotifier()
         } catch {
-            print("Error stopping notifier")
+            print(StopNotifierErrorMessage)
         }
     }
     

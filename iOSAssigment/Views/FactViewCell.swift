@@ -51,7 +51,7 @@ class FactViewCell: UITableViewCell {
                 }
                 
                 if let imageUrl = factItem.imageUrl {
-                    self.displayImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "placeholder"))
+                    self.displayImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: PlaceholderImageName))
                 }
             }
         }
@@ -91,6 +91,6 @@ class FactViewCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(CellCoderFatalError)
     }
 }
