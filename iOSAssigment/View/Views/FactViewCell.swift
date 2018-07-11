@@ -51,7 +51,7 @@ class FactViewCell: UITableViewCell {
                 }
                 
                 if let imageUrl = factItem.imageUrl {
-                    self.displayImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "placeholder"))
+                    self.displayImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: PlaceholderImageName))
                 }
             }
         }
@@ -65,6 +65,8 @@ class FactViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    //Override init method for cell UI
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -86,11 +88,9 @@ class FactViewCell: UITableViewCell {
         descriptionLabel.leadingAnchor.constraint(equalTo:self.displayImageView.trailingAnchor, constant:10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo:marginGuide.trailingAnchor).isActive = true
         descriptionLabel.bottomAnchor.constraint(equalTo:marginGuide.bottomAnchor,constant: -20).isActive = true
-        
-
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(CellCoderFatalError)
     }
 }
