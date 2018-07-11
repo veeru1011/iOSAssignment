@@ -51,11 +51,6 @@ class ViewController: UIViewController {
         // Notifier for datasource fetch data
         self.dataSource.data.addAndNotify(observer: self) { [weak self] in
             
-            //Hide ANLoader after 100 milisecound
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                ANLoader.hide()
-            }
-            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
                 if (self?.refreshControl.isRefreshing)! {
@@ -71,7 +66,20 @@ class ViewController: UIViewController {
         
         // Notifier for Error message
         factListViewModel.errorMessage?.bindAndFire { [unowned self] in
-            self.showAlert($0)
+            if $0.count > 0 {
+                self.showAlert($0)
+            }
+        }
+        
+        // Notifier for Loading message
+        
+        factListViewModel.isLoading?.bindAndFire { isLoading in
+            if !isLoading {
+                //Hide ANLoader after 100 milisecound
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    ANLoader.hide()
+                }
+            }
         }
         
         // viewModel fetch data
