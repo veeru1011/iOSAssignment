@@ -11,63 +11,52 @@ import Foundation
 class FactListViewModel: NSObject {
     
      let apiManager: APIManager!
-     var factList : FactList?
-     var facts : [Fact]?
-     var errorMessage : String?
+     weak var dataSource : GenericDataSource<Fact>?
     
+     var title: Dynamic<String>?
+     var errorMessage: Dynamic<String>?
     
-    init(apiMgr: APIManager) {
+    init(apiMgr: APIManager = APIManager.shared(), dataSource : GenericDataSource<Fact>?) {
+        self.dataSource = dataSource
         self.apiManager = apiMgr
-        super.init()
+        self.title = Dynamic("")
     }
-    
-    func getFactList(completion: @escaping() -> Void )  {
+
+    func getFactList(_ completion: (() -> Void )? = nil )  {
         NetworkManager.isUnreachable { _ in
-            self.errorMessage = NoConnectivityMessage
-            completion()
+            self.errorMessage = Dynamic(NoConnectivityMessage)
+            completion?()
         }
         
         NetworkManager.isReachable { _ in
-            
             self.apiManager.getFactList { (success, factlist, errorMessage) in
-                
             switch success {
             case true :
                 if let list = factlist {
-                    self.factList = list
+                    
                     if let facts = list.facts?.filter({ !($0.title == nil && $0.descriptions == nil && $0.imageUrl == nil) }) {
-                        self.facts = facts
+                        self.dataSource?.data.value = facts
+                    }
+                    if let navTitle = list.title {
+                        
+                        self.title?.value = navTitle
+                        DispatchQueue.main.async {
+                            self.title?.value = navTitle
+                        }
                     }
                 }
-                self.errorMessage = nil
+                DispatchQueue.main.sync {
+                   self.errorMessage?.value = ""
+                }
             case false:
-                self.errorMessage = errorMessage
+                DispatchQueue.main.sync {
+                    self.errorMessage?.value = errorMessage
+                }
+                
             }
-            completion()
+            completion?()
         }
         
         }
-    }
-    
-    func navigationTitle() -> String {
-        return self.factList?.title ?? ""
-    }
-    
-    func numberOfFactsToDisplay() -> Int {
-        if let facts = facts {
-            return facts.count
-        }
-        return 0
-    }
-    
-    func factAtIndex(index: Int) -> Fact? {
-        if let facts = facts {
-            return facts[index]
-        }
-        return nil
-    }
-    
-    func getErrorMessage() -> String? {
-        return self.errorMessage
     }
 }

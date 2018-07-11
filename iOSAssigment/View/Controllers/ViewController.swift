@@ -11,7 +11,7 @@ import ANLoader
 
 class ViewController: UIViewController {
     
-    //Apimanger for initilising viewModel
+    //ApiManger for initilising viewModel
     lazy var apiManger =  {
         return APIManager.shared()
     }
@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     var factListViewModel: FactListViewModel!
     //Initilize table view
     let tableView = UITableView(frame:.zero, style: .grouped)
+    
+    let dataSource = FactListDataSource()
+    
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -33,9 +36,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //initilise FactListViewModel with APIManger
-        
-        factListViewModel = FactListViewModel(apiMgr: apiManger())
+        //initilise FactListViewModel with DataSource
+        factListViewModel = FactListViewModel.init(dataSource: dataSource)
         
         //Set Up Navigation bar
         setUpNavigation()
@@ -43,13 +45,39 @@ class ViewController: UIViewController {
         //Set tableview object for displaying data
         setUpTableView()
         
-        
+        //Start Looding UI
         ANLoader.showLoading(Loading, disableUI: true)
         
+        // Notifier for datasource fetch data
+        self.dataSource.data.addAndNotify(observer: self) { [weak self] in
+            
+            //Hide ANLoader after 100 milisecound
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                ANLoader.hide()
+            }
+            
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                if (self?.refreshControl.isRefreshing)! {
+                    self?.refreshControl.endRefreshing()
+                }
+            }
+        }
+        
+        // Notifier for navigation title
+        factListViewModel.title?.bindAndFire { [unowned self] in
+            self.setNavigationTitle($0)
+        }
+        
+        // Notifier for Error message
+        factListViewModel.errorMessage?.bindAndFire { [unowned self] in
+            self.showAlert($0)
+        }
+        
         // viewModel fetch data
-        fetchData()
+        factListViewModel.getFactList()
     }
-
+    
     // MARK: - UI Helper
     func setUpTableView() {
         view.addSubview(tableView)
@@ -72,7 +100,7 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
         }
         
-        tableView.dataSource = self
+        tableView.dataSource = self.dataSource
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.addSubview(self.refreshControl)
@@ -85,6 +113,8 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+        
+        //prefersLargeTitles for iOS11
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationItem.largeTitleDisplayMode = .always
@@ -93,58 +123,25 @@ class ViewController: UIViewController {
     
     //  Handle Pull to refresh method
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        fetchData()
+        self.factListViewModel.getFactList()
     }
     
-    // MARK: - Fetch Data from server
-    func fetchData() {
-        
-        factListViewModel.getFactList {
-            
-            //Hide ANLoader after 100 milisecound
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                ANLoader.hide()
-            }
-            
-            if let errorMessage = self.factListViewModel.getErrorMessage() {
-                self.showAlert(errorMessage)
-            }
-            else {
-                DispatchQueue.main.async {
-                    self.navigationItem.title = self.factListViewModel.navigationTitle()
-                    self.tableView.reloadData()
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
-                    }
-                }
-            }
+    // MARK: - AlertMessage UI
+    func setNavigationTitle(_ title: String) {
+        DispatchQueue.main.async {
+            self.navigationItem.title = title
         }
     }
     
     // MARK: - AlertMessage UI
     func showAlert(_ message: String, title: String = AlertTitle) {
-        ANLoader.hide()
-        let alertController = UIAlertController(title: title, message:
-            message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: DismissButtonTitle, style: UIAlertActionStyle.default,handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            ANLoader.hide()
+            let alertController = UIAlertController(title: title, message:
+                message, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: DismissButtonTitle, style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
-}
-
-// MARK: - UITableViewDataSource
-extension ViewController : UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.factListViewModel.numberOfFactsToDisplay()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath) as! FactViewCell
-       
-        cell.fact =  self.factListViewModel.factAtIndex(index: indexPath.row)
-        
-        return cell
-    }
-    
 }
 
