@@ -40,14 +40,14 @@ class FactViewCell: UITableViewCell {
     
     var fact: Fact? {
         didSet {
-            self.titleLabel.text  = " "
-            self.descriptionLabel.text  = " "
+            self.titleLabel.text  = WhiteSpace
+            self.descriptionLabel.text  = WhiteSpace
             self.displayImageView.image = nil
             guard let factItem = fact else { return }
             if let title = factItem.title {
                 titleLabel.text = title
                 if let description = factItem.descriptions {
-                    descriptionLabel.text = " \(description) "
+                    descriptionLabel.text = description
                 }
                 
                 if let imageUrl = factItem.imageUrl {

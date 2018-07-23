@@ -25,4 +25,6 @@ let Loading = "Loading"
 let UTF8ErrorMessage = "could not convert data to UTF-8 format"
 let StartNotifierErrorMessage = "Unable to start notifier"
 let StopNotifierErrorMessage = "Error stopping notifier"
+let EmptyString = ""
+let WhiteSpace = " "
 
