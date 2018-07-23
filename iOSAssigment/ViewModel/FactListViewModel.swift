@@ -20,8 +20,8 @@ class FactListViewModel: NSObject {
     init(apiMgr: APIManager = APIManager.shared(), dataSource : GenericDataSource<Fact>?) {
         self.dataSource = dataSource
         self.apiManager = apiMgr
-        self.title = Dynamic("")
-        self.errorMessage = Dynamic("")
+        self.title = Dynamic(EmptyString)
+        self.errorMessage = Dynamic(EmptyString)
         self.isLoading = Dynamic(true)
     }
     

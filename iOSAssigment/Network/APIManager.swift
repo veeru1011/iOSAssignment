@@ -49,7 +49,7 @@ class APIManager: NSObject {
                 }
                 let decoder = JSONDecoder()
                 let factlist = try decoder.decode(FactList.self, from: dataInUTF8Format)
-                completionHandler(true,factlist,"")
+                completionHandler(true,factlist,EmptyString)
                 
             } catch let err {
                 print(err)

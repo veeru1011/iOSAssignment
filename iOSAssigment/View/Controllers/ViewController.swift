@@ -30,20 +30,31 @@ class ViewController: UIViewController {
                                  for: .valueChanged)
         refreshControl.tintColor = UIColor.red
         return refreshControl
-        
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //initilise FactListViewModel with DataSource
-        factListViewModel = FactListViewModel.init(dataSource: dataSource)
-        
+
         //Set Up Navigation bar
         setUpNavigation()
         
         //Set tableview object for displaying data
         setUpTableView()
+        
+        //initilise factListViewModel and setup for callback
+        setUpFactListViewModel()
+    
+        // viewModel fetch data
+        factListViewModel.getFactList()
+    }
+    
+    // MARK: - SetUp ViewModel
+    
+    //  Set up factListViewModel and  Add All Listioner for viewModel data updated
+    func setUpFactListViewModel() {
+        
+        //initilise FactListViewModel with DataSource
+        factListViewModel = FactListViewModel(dataSource: dataSource)
         
         //Start Looding UI
         ANLoader.showLoading(Loading, disableUI: true)
@@ -72,7 +83,6 @@ class ViewController: UIViewController {
         }
         
         // Notifier for Loading message
-        
         factListViewModel.isLoading?.bindAndFire { isLoading in
             if !isLoading {
                 //Hide ANLoader after 100 milisecound
@@ -81,9 +91,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
-        // viewModel fetch data
-        factListViewModel.getFactList()
     }
     
     // MARK: - UI Helper
@@ -117,7 +124,7 @@ class ViewController: UIViewController {
     
     //  NavigationBar setup method
     func setUpNavigation() {
-        navigationItem.title = ""
+        navigationItem.title = EmptyString
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
@@ -128,13 +135,13 @@ class ViewController: UIViewController {
             self.navigationItem.largeTitleDisplayMode = .always
         }
     }
-    
+
     //  Handle Pull to refresh method
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         self.factListViewModel.getFactList()
     }
     
-    // MARK: - AlertMessage UI
+    //  Update Navigation Title
     func setNavigationTitle(_ title: String) {
         DispatchQueue.main.async {
             self.navigationItem.title = title
