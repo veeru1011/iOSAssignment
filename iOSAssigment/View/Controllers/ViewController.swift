@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self.dataSource
         tableView.estimatedRowHeight = 100
-        tableView.accessibilityIdentifier = "table-factListTableView"
+        tableView.accessibilityIdentifier = TableViewAccessibilityIdentifier
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.addSubview(self.refreshControl)
         tableView.register(FactViewCell.self, forCellReuseIdentifier: CellIdentifier)
