@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B961F71A2105E8F7000B11A5 /* iOSAssigmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B961F7192105E8F7000B11A5 /* iOSAssigmentUITests.swift */; };
 		B96A399220EE2E0E00D89B5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A399120EE2E0E00D89B5F /* AppDelegate.swift */; };
 		B96A399920EE2E1900D89B5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B96A399820EE2E1900D89B5F /* Assets.xcassets */; };
 		B96A39AE20EE301400D89B5F /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96A39AD20EE301400D89B5F /* Fact.swift */; };
@@ -24,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B961F71C2105E8F7000B11A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B96A398620EE2E0E00D89B5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B96A398D20EE2E0E00D89B5F;
+			remoteInfo = iOSAssigment;
+		};
 		BC860F8820EF16A90068CF65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B96A398620EE2E0E00D89B5F /* Project object */;
@@ -37,6 +45,9 @@
 		193323B86FE2D7629ABD7F0E /* Pods-iOSAssigment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAssigment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment.debug.xcconfig"; sourceTree = "<group>"; };
 		455522DF0A33A44B9842E046 /* Pods-iOSAssigment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAssigment.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAssigment/Pods-iOSAssigment.release.xcconfig"; sourceTree = "<group>"; };
 		613303F1646CDCBCAEDCB5C7 /* Pods_iOSAssigment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSAssigment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B961F7172105E8F7000B11A5 /* iOSAssigmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSAssigmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B961F7192105E8F7000B11A5 /* iOSAssigmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSAssigmentUITests.swift; sourceTree = "<group>"; };
+		B961F71B2105E8F7000B11A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B96A398E20EE2E0E00D89B5F /* iOSAssigment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAssigment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B96A399120EE2E0E00D89B5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B96A399820EE2E1900D89B5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +68,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B961F7142105E8F7000B11A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B96A398B20EE2E0E00D89B5F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,6 +110,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B961F7182105E8F7000B11A5 /* iOSAssigmentUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B961F7192105E8F7000B11A5 /* iOSAssigmentUITests.swift */,
+				B961F71B2105E8F7000B11A5 /* Info.plist */,
+			);
+			path = iOSAssigmentUITests;
+			sourceTree = "<group>";
+		};
 		B96A398520EE2E0E00D89B5F = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +126,7 @@
 				B96A398F20EE2E0E00D89B5F /* Products */,
 				1D1659D5822189B619500E43 /* Pods */,
 				BC860F8420EF16A90068CF65 /* iOSAssigmentTests */,
+				B961F7182105E8F7000B11A5 /* iOSAssigmentUITests */,
 				AB05E5C26373EBDF11930FC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +136,7 @@
 			children = (
 				B96A398E20EE2E0E00D89B5F /* iOSAssigment.app */,
 				BC860F8320EF16A90068CF65 /* iOSAssigmentTests.xctest */,
+				B961F7172105E8F7000B11A5 /* iOSAssigmentUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,6 +238,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B961F7162105E8F7000B11A5 /* iOSAssigmentUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B961F7202105E8F7000B11A5 /* Build configuration list for PBXNativeTarget "iOSAssigmentUITests" */;
+			buildPhases = (
+				B961F7132105E8F7000B11A5 /* Sources */,
+				B961F7142105E8F7000B11A5 /* Frameworks */,
+				B961F7152105E8F7000B11A5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B961F71D2105E8F7000B11A5 /* PBXTargetDependency */,
+			);
+			name = iOSAssigmentUITests;
+			productName = iOSAssigmentUITests;
+			productReference = B961F7172105E8F7000B11A5 /* iOSAssigmentUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B96A398D20EE2E0E00D89B5F /* iOSAssigment */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B96A39A020EE2E1900D89B5F /* Build configuration list for PBXNativeTarget "iOSAssigment" */;
@@ -252,10 +299,15 @@
 		B96A398620EE2E0E00D89B5F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = VBT;
 				TargetAttributes = {
+					B961F7162105E8F7000B11A5 = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B96A398D20EE2E0E00D89B5F;
+					};
 					B96A398D20EE2E0E00D89B5F = {
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
@@ -282,11 +334,19 @@
 			targets = (
 				B96A398D20EE2E0E00D89B5F /* iOSAssigment */,
 				BC860F8220EF16A90068CF65 /* iOSAssigmentTests */,
+				B961F7162105E8F7000B11A5 /* iOSAssigmentUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B961F7152105E8F7000B11A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B96A398C20EE2E0E00D89B5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -348,6 +408,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B961F7132105E8F7000B11A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B961F71A2105E8F7000B11A5 /* iOSAssigmentUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B96A398A20EE2E0E00D89B5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,6 +445,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B961F71D2105E8F7000B11A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B96A398D20EE2E0E00D89B5F /* iOSAssigment */;
+			targetProxy = B961F71C2105E8F7000B11A5 /* PBXContainerItemProxy */;
+		};
 		BC860F8920EF16A90068CF65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B96A398D20EE2E0E00D89B5F /* iOSAssigment */;
@@ -385,6 +458,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B961F71E2105E8F7000B11A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSAssigmentUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vbt.iOSAssigmentUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSAssigment;
+			};
+			name = Debug;
+		};
+		B961F71F2105E8F7000B11A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = iOSAssigmentUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vbt.iOSAssigmentUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSAssigment;
+			};
+			name = Release;
+		};
 		B96A399E20EE2E1900D89B5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -573,6 +674,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B961F7202105E8F7000B11A5 /* Build configuration list for PBXNativeTarget "iOSAssigmentUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B961F71E2105E8F7000B11A5 /* Debug */,
+				B961F71F2105E8F7000B11A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B96A398920EE2E0E00D89B5F /* Build configuration list for PBXProject "iOSAssigment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
