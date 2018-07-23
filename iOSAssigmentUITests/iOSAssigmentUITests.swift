@@ -39,7 +39,6 @@ class iOSAssigmentUITests: XCTestCase {
         
         // Get an array of cells
         let tableCells = tableView.cells
-        
         if tableCells.count > 0 {
           
             let promise = expectation(description: "Wait for table view Scrolling")
@@ -51,7 +50,7 @@ class iOSAssigmentUITests: XCTestCase {
             XCTAssertTrue(true, "Finished table view Scrolling")
             
         } else {
-            XCTAssert(false, "Was not able to find any table cells")
+            XCTAssertTrue(tableCells.count == 0, "Was not able to find any table cells")
         }
         
     }

@@ -27,4 +27,5 @@ let StartNotifierErrorMessage = "Unable to start notifier"
 let StopNotifierErrorMessage = "Error stopping notifier"
 let EmptyString = ""
 let WhiteSpace = " "
+let TableViewAccessibilityIdentifier = "table-factListTableView"
 
